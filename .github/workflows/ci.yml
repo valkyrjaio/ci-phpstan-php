@@ -88,7 +88,7 @@ jobs:
 
   phpstan:
     name: PHPStan
-    uses: valkyrjaio/.github/.github/workflows/_php-ci-tool.yml@71932f11204140d6bbf9edfdebd449e917e3e6db
+    uses: valkyrjaio/.github/.github/workflows/_php-ci-tool.yml@1243d6eb0a7b9425f22295e0097dcf70e8276322
     with:
       tool: 'phpstan'
       php-version: '8.4'

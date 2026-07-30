@@ -85,18 +85,17 @@ jobs:
 
   phpstan:
     name: PHPStan
-    uses: ./.github/workflows/_workflow-call.yml
+    uses: valkyrjaio/.github/.github/workflows/_php-ci-tool.yml@71932f11204140d6bbf9edfdebd449e917e3e6db
     with:
+      tool: 'phpstan'
       php-version: '8.4'
       paths: |
         ci:
           - '.github/ci/phpstan/**'
           - '.github/workflows/ci.yml'
-          - '.github/workflows/_workflow-call.yml'
         files:
           - '.github/ci/phpstan/**'
           - '.github/workflows/ci.yml'
-          - '.github/workflows/_workflow-call.yml'
           - 'src/**/*.php'
           - 'tests/**/*.php'
           - 'composer.json'

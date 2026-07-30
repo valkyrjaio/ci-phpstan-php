@@ -1,6 +1,23 @@
 # Release Notes for 26.x
 
-## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.1.11...26.x)
+## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.2.0...26.x)
+
+## [v26.2.0](https://github.com/valkyrjaio/phpstan/compare/v26.1.11...v26.2.0) - 2026-07-29
+
+* [GitHub] Update ci-rector-php workflow refs to v26.1.11 by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/130
+* [GitHub] Update .github workflow refs to v26.12.0 by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/131
+* [CI] Pin GitHub Actions to commit SHAs in the reusable workflow by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/133
+* [GitHub] Update .github workflow refs to v26.12.1 by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/134
+* [Composer] Update composer dependencies by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/132
+* [GitHub] Update .github workflow refs to v26.12.2 by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/135
+* [Composer] Update composer dependencies by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/136
+* [GitHub] Fix the create-version-branch caller to match the PHP template by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/138
+* [Workflow] ci: Rerun checks when a pull request is edited or retargeted by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/139
+* [GitHub] Use the consolidated reusable PHP CI tool workflow for PHPStan by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/137
+* [Workflow] ci: Update the release bump input to the conventional options by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/140
+* [Workflow] ci: Remove the superseded reusable workflow by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/142
+* [Workflow] ci: Update .github workflow refs to v26.13.0 by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/144
+* [Dependency] build: Update composer dependencies by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/143
 
 ## [v26.1.11](https://github.com/valkyrjaio/phpstan/compare/v26.1.10...v26.1.11) - 2026-07-27
 

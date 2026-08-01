@@ -1,6 +1,14 @@
 # Release Notes for 26.x
 
-## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.2.1...26.x)
+## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.2.2...26.x)
+
+## [v26.2.2](https://github.com/valkyrjaio/phpstan/compare/v26.2.1...v26.2.2) - 2026-08-01
+
+* [Workflow] ci: Correct the Claude review trigger by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/154
+* [Workflow] refactor: Split the pull request checks out of CI by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/155
+* [Workflow] ci: Update .github workflow refs to v26.18.0 by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/157
+* [Workflow] ci: Update .github workflow refs to v26.18.1 by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/158
+* [Workflow] ci: Rename the version branch workflow from major to yearly by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/156
 
 ## [v26.2.1](https://github.com/valkyrjaio/phpstan/compare/v26.2.0...v26.2.1) - 2026-07-31
 

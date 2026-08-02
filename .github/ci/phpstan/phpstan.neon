@@ -7,5 +7,6 @@ parameters:
         - ./autoload.php
     paths:
         - ../../../src
+        - ../../../cache.php
     treatPhpDocTypesAsCertain: false
     ignoreErrors:

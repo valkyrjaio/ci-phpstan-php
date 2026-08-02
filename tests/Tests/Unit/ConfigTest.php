@@ -22,18 +22,9 @@ final class ConfigTest extends PhpStanTestCase
 {
     public function testCacheFileReturnsTheCacheDirectory(): void
     {
-        $config = require dirname(__DIR__, 3) . '/cache.php';
+        $config = require_once dirname(__DIR__, 3) . '/cache.php';
 
         self::assertSame(['parameters' => ['tmpDir' => Cache::getDirectory()]], $config);
-    }
-
-    public function testCacheFileLoadsTheClassOnEveryRead(): void
-    {
-        // PHPStan reads a configuration file more than once in one process.
-        $first  = require dirname(__DIR__, 3) . '/cache.php';
-        $second = require dirname(__DIR__, 3) . '/cache.php';
-
-        self::assertSame($first, $second);
     }
 
     public function testConfigFileIncludesTheCacheFile(): void

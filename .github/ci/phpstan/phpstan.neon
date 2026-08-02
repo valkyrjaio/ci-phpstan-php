@@ -1,10 +1,12 @@
 includes:
     - phpstan-baseline.neon
+    - ../../../cache.php
 parameters:
     level: 9
     bootstrapFiles:
         - ./autoload.php
     paths:
         - ../../../src
+        - ../../../cache.php
     treatPhpDocTypesAsCertain: false
     ignoreErrors:

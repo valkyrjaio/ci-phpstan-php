@@ -42,6 +42,51 @@ configuration. Key settings:
 | `level`                     | `9`     | Strictest level — all rule categories enabled                  |
 | `treatPhpDocTypesAsCertain` | `false` | PHPDoc types are not blindly trusted; prevents false negatives |
 
+### Shared Configuration
+
+The package ships a `config.neon` with the settings that every Valkyrja project
+shares. Include it from the `phpstan.neon` in the CI directory:
+
+```neon
+includes:
+    - phpstan-baseline.neon
+    - vendor/valkyrja/phpstan/config.neon
+```
+
+### Cache Directory
+
+PHPStan writes its cache to `sys_get_temp_dir() . '/phpstan'`, so every project
+on a machine writes to one directory. A cache entry holds an absolute path that
+reaches inside `phpstan.phar`. That `phar` belongs to the project that wrote the
+entry. A second project then reads a path that it does not own.
+
+The failure appears when the first project moves or goes away. PHPStan reports
+that a file inside a `phar` "is not a file", and it names a directory of another
+repository.
+
+`config.neon` prevents this failure. It sets `tmpDir` to a directory that
+belongs to one project:
+
+```php
+sys_get_temp_dir() . '/valkyrja-phpstan/' . md5(__DIR__)
+```
+
+`Valkyrja\PhpStan\Cache::getDirectory()` builds the path. `__DIR__` identifies
+one project, because Composer installs this package into the `vendor` directory
+of each project. One directory holds every PHPStan cache, because the result
+cache and the compiled container both sit below `tmpDir`.
+
+Warning: `__DIR__` resolves a symbolic link. Two projects that share one
+checkout through a Composer `path` repository therefore share one cache
+directory, and the failure above comes back.
+
+Nothing removes a cache directory. A project that goes away leaves its
+directory, so remove the directories at intervals:
+
+```bash
+rm -rf "$(php -r 'echo sys_get_temp_dir();')/valkyrja-phpstan"
+```
+
 ### Scanned Paths
 
 | Path   | Included |

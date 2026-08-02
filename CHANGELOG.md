@@ -1,6 +1,12 @@
 # Release Notes for 26.x
 
-## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.2.3...26.x)
+## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.2.4...26.x)
+
+## [v26.2.4](https://github.com/valkyrjaio/phpstan/compare/v26.2.3...v26.2.4) - 2026-08-02
+
+* [Cache] fix(#174): Give each project its own cache directory by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/175
+* [PhpCsFixer] refactor: Build the copyright header from the package name by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/177
+* [Dependency] build: Update composer dependencies by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/178
 
 ## [v26.2.3](https://github.com/valkyrjaio/phpstan/compare/v26.2.2...v26.2.3) - 2026-08-02
 

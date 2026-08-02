@@ -2,6 +2,11 @@ name: Rebase to Master
 
 on:
   workflow_dispatch:
+    inputs:
+      allow_diverged:
+        description: 'Rebase even when master holds commits of its own'
+        type: boolean
+        default: false
 
 run-name: "Rebase ${{ github.ref_name }} to master"
 
@@ -13,3 +18,5 @@ jobs:
     secrets:
       VALKYRJA_GHA_APP_ID: ${{ secrets.VALKYRJA_GHA_APP_ID }}
       VALKYRJA_GHA_PRIVATE_KEY: ${{ secrets.VALKYRJA_GHA_PRIVATE_KEY }}
+    with:
+      allow_diverged: ${{ inputs.allow_diverged }}

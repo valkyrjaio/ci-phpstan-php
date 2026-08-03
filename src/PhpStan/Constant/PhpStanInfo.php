@@ -19,12 +19,12 @@ final class PhpStanInfo
      *
      * @var non-empty-string
      */
-    public const string VERSION = '26.2.4';
+    public const string VERSION = '26.3.0';
 
     /**
      * The PhpStan package version build datetime.
      *
      * @var non-empty-string
      */
-    public const string VERSION_BUILD_DATE_TIME = 'August 2 2026 16:16:44 MST';
+    public const string VERSION_BUILD_DATE_TIME = 'August 3 2026 09:18:55 MST';
 }

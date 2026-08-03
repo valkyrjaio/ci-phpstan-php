@@ -36,6 +36,7 @@ use Valkyrja\PhpStan\Tests\Fixtures\Entity\Trait\DateableFixtureTrait;
 use Valkyrja\PhpStan\Tests\Fixtures\Entity\UserFixture;
 use Valkyrja\PhpStan\Tests\Fixtures\Message\Collection\HeaderCollectionFixture;
 use Valkyrja\PhpStan\Tests\Fixtures\Message\Constant\HeaderFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Message\Enum\StatusFixture;
 use Valkyrja\PhpStan\Tests\Fixtures\Message\StatusCodeEnum;
 use Valkyrja\PhpStan\Tests\Fixtures\Routing\MatcherFixture;
 use Valkyrja\PhpStan\Tests\Fixtures\Type\Factory\UuidFactoryFixture;
@@ -60,6 +61,7 @@ final class DataObjectStaticMethodRuleTest extends PhpStanTestCase
             'support below a type'     => [ArrayFixture::class],
             'constant below a message' => [HeaderFixture::class],
             'provider below an entity' => [UserServiceProviderFixture::class],
+            'enum below a message'     => [StatusFixture::class],
         ];
     }
 
@@ -206,15 +208,18 @@ final class DataObjectStaticMethodRuleTest extends PhpStanTestCase
         );
     }
 
-    public function testAbstractStaticMethodIsReported(): void
+    public function testAbstractAndProtectedStaticMethodsAreReported(): void
     {
         self::assertSame(
-            ['Data object ' . EntityFixture::class . ' must not have the static method getIdField().'],
+            [
+                'Data object ' . EntityFixture::class . ' must not have the static method getFormat().',
+                'Data object ' . EntityFixture::class . ' must not have the static method getIdField().',
+            ],
             self::messages(EntityFixture::class)
         );
     }
 
-    public function testProtectedStaticMethodIsReported(): void
+    public function testPrivateStaticMethodIsReported(): void
     {
         self::assertSame(
             [
@@ -234,6 +239,7 @@ final class DataObjectStaticMethodRuleTest extends PhpStanTestCase
                 $prefix . 'getAnotherType().',
                 $prefix . 'getArray().',
                 $prefix . 'getNullable().',
+                $prefix . 'getSameShortNameInAnotherNamespace().',
                 $prefix . 'getString().',
                 $prefix . 'getUnion().',
                 $prefix . 'getUntyped().',

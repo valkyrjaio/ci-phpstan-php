@@ -14,7 +14,7 @@ namespace Valkyrja\PhpStan;
 
 use Valkyrja\PhpStan\Rule\DataObjectStaticMethodRule;
 
-class Rules
+final class Rules
 {
     /**
      * Get every rule that this package ships.

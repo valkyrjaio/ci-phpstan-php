@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Type;
 
+use Valkyrja\PhpStan\Tests\Fixtures\Message\ReturnTypeFixture as MessageReturnTypeFixture;
 use Valkyrja\PhpStan\Tests\Fixtures\Routing\MatcherFixture;
 
 final class ReturnTypeFixture
@@ -39,6 +40,11 @@ final class ReturnTypeFixture
     public static function getArray(): array
     {
         return [];
+    }
+
+    public static function getSameShortNameInAnotherNamespace(): MessageReturnTypeFixture
+    {
+        return new MessageReturnTypeFixture();
     }
 
     public static function getAnotherType(): MatcherFixture

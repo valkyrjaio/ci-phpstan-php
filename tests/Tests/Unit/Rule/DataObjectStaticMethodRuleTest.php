@@ -22,63 +22,127 @@ use PhpParser\ParserFactory;
 use PHPStan\Analyser\Scope;
 use PHPStan\Rules\IdentifierRuleError;
 use PHPUnit\Framework\Attributes\DataProvider;
+use ReflectionClass;
+use Valkyrja\Http\Message\Header\Header;
+use Valkyrja\Http\Routing\Matcher\Matcher;
+use Valkyrja\Orm\Entity\Contract\EntityContract;
 use Valkyrja\PhpStan\Rule\DataObjectStaticMethodRule;
 use Valkyrja\PhpStan\Tests\Abstract\PhpStanTestCase;
+use Valkyrja\PhpStan\Tests\Fixtures\Entity\Abstract\EntityFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Entity\AnonymousFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Entity\Contract\UserFixtureContract;
+use Valkyrja\PhpStan\Tests\Fixtures\Entity\Provider\UserServiceProviderFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Entity\ProviderlessFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Entity\Trait\DateableFixtureTrait;
+use Valkyrja\PhpStan\Tests\Fixtures\Entity\UserFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Message\Collection\HeaderCollectionFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Message\Constant\HeaderFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Message\StatusCodeEnum;
+use Valkyrja\PhpStan\Tests\Fixtures\Routing\MatcherFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Type\Factory\UuidFactoryFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Type\ReturnTypeFixture;
+use Valkyrja\PhpStan\Tests\Fixtures\Type\Support\ArrayFixture;
+use Valkyrja\Type\String\StringT;
+
+use function file_get_contents;
+use function sort;
 
 final class DataObjectStaticMethodRuleTest extends PhpStanTestCase
 {
     /**
-     * @return array<string, array{non-empty-string}>
+     * A class that holds a static method, even below a data segment.
+     *
+     * @return array<string, array{class-string}>
      */
     public static function holderSegmentProvider(): array
     {
         return [
-            'factory below a type'     => ['Valkyrja\Type\Uuid\Factory'],
-            'support below a type'     => ['Valkyrja\Type\Array\Support'],
-            'constant below a message' => ['Valkyrja\Http\Message\Constant'],
-            'enum below a message'     => ['Valkyrja\Http\Message\Enum'],
-            'provider below an entity' => ['Valkyrja\Auth\Entity\Provider'],
+            'factory below a type'     => [UuidFactoryFixture::class],
+            'support below a type'     => [ArrayFixture::class],
+            'constant below a message' => [HeaderFixture::class],
+            'provider below an entity' => [UserServiceProviderFixture::class],
         ];
     }
 
     /**
-     * @return array<string, array{non-empty-string}>
+     * A class that the rule never reports.
+     *
+     * @return array<string, array{class-string}>
      */
-    public static function ownTypeReturnProvider(): array
+    public static function exemptClassProvider(): array
     {
         return [
-            'static'             => ['static'],
-            'self'               => ['self'],
-            'uppercase static'   => ['STATIC'],
-            'own short name'     => ['StringT'],
-            'own qualified name' => ['\Valkyrja\Type\String\StringT'],
+            'an enum'             => [StatusCodeEnum::class],
+            'an anonymous class'  => [AnonymousFixture::class],
+            'no data segment'     => [MatcherFixture::class],
+            'no static method'    => [ProviderlessFixture::class],
+            'a framework type'    => [StringT::class],
+            'a framework header'  => [Header::class],
+            'a framework matcher' => [Matcher::class],
         ];
     }
 
     /**
-     * @return array<string, array{non-empty-string}>
+     * Run the rule over the file that declares a class.
+     *
+     * @param class-string $className
+     *
+     * @return list<IdentifierRuleError>
      */
-    public static function foreignTypeReturnProvider(): array
+    private static function process(string $className): array
     {
-        return [
-            'scalar'        => ['string'],
-            'array'         => ['array'],
-            'another class' => ['\Valkyrja\Type\Int\IntT'],
-            'nullable'      => ['?string'],
-            'union'         => ['string|int'],
-        ];
+        $rule   = new DataObjectStaticMethodRule();
+        $scope  = self::createStub(Scope::class);
+        $errors = [];
+
+        foreach (self::parse($className) as $classLike) {
+            foreach ($rule->processNode($classLike, $scope) as $error) {
+                $errors[] = $error;
+            }
+        }
+
+        return $errors;
     }
 
     /**
-     * @param non-empty-string $namespace
-     * @param non-empty-string $code
+     * Get every message that the rule reports for a class, in a stable order.
+     *
+     * @param class-string $className
+     *
+     * @return list<string>
+     */
+    private static function messages(string $className): array
+    {
+        $messages = [];
+
+        foreach (self::process($className) as $error) {
+            $messages[] = $error->getMessage();
+        }
+
+        sort($messages);
+
+        return $messages;
+    }
+
+    /**
+     * Parse the file that declares a class into its class like nodes.
+     *
+     * @param class-string $className
      *
      * @return list<ClassLike>
      */
-    private static function parse(string $namespace, string $code): array
+    private static function parse(string $className): array
     {
+        $fileName = new ReflectionClass($className)->getFileName();
+
+        self::assertNotFalse($fileName);
+
+        $source = file_get_contents($fileName);
+
+        self::assertNotFalse($source);
+
         $parser     = new ParserFactory()->createForNewestSupportedVersion();
-        $statements = $parser->parse("<?php namespace $namespace; $code");
+        $statements = $parser->parse($source);
 
         self::assertNotNull($statements);
 
@@ -114,190 +178,91 @@ final class DataObjectStaticMethodRuleTest extends PhpStanTestCase
 
     public function testStaticMethodOnAnEntityIsReported(): void
     {
-        $errors = $this->process(
-            'Valkyrja\Auth\Entity',
-            'class User { public static function getTableName(): string { return "users"; } }'
-        );
+        $errors = self::process(UserFixture::class);
 
         self::assertCount(1, $errors);
         self::assertSame(
-            'Data object Valkyrja\Auth\Entity\User must not have the static method getTableName().',
+            'Data object ' . UserFixture::class . ' must not have the static method getTableName().',
             $errors[0]->getMessage()
         );
         self::assertSame(DataObjectStaticMethodRule::IDENTIFIER, $errors[0]->getIdentifier());
     }
 
-    public function testEveryStaticMethodIsReported(): void
+    public function testEveryStaticMethodOnAContractIsReported(): void
     {
-        $errors = $this->process(
-            'Valkyrja\Orm\Entity\Contract',
-            'interface EntityContract {
-                public static function getTableName(): string;
-                public static function getIdField(): string;
-            }'
+        self::assertSame(
+            [
+                'Data object ' . UserFixtureContract::class . ' must not have the static method getPasswordField().',
+                'Data object ' . UserFixtureContract::class . ' must not have the static method getUsernameField().',
+            ],
+            self::messages(UserFixtureContract::class)
         );
-
-        self::assertCount(2, $errors);
     }
 
-    public function testOnlyTheStaticMethodThatReturnsAnotherTypeIsReported(): void
+    public function testStaticMethodOnATraitIsReported(): void
     {
-        $errors = $this->process(
-            'Valkyrja\Type\String',
-            'class StringT {
-                public static function fromValue(mixed $value): static { return new static(); }
-                public function asValue(): string { return ""; }
-                public static function getCastings(): array { return []; }
-            }'
-        );
-
-        self::assertCount(1, $errors);
         self::assertSame(
-            'Data object Valkyrja\Type\String\StringT must not have the static method getCastings().',
-            $errors[0]->getMessage()
+            ['Data object ' . DateableFixtureTrait::class . ' must not have the static method getDateFormat().'],
+            self::messages(DateableFixtureTrait::class)
+        );
+    }
+
+    public function testAbstractStaticMethodIsReported(): void
+    {
+        self::assertSame(
+            ['Data object ' . EntityFixture::class . ' must not have the static method getIdField().'],
+            self::messages(EntityFixture::class)
         );
     }
 
     public function testProtectedStaticMethodIsReported(): void
     {
-        $errors = $this->process(
-            'Valkyrja\Http\Message\Header\Collection',
-            'class HeaderCollection { protected static function validateHeader(mixed $param): void {} }'
+        self::assertSame(
+            [
+                'Data object ' . HeaderCollectionFixture::class
+                . ' must not have the static method validateHeader().',
+            ],
+            self::messages(HeaderCollectionFixture::class)
         );
-
-        self::assertCount(1, $errors);
     }
 
-    public function testTraitIsReported(): void
+    public function testOnlyTheStaticMethodThatReturnsAnotherTypeIsReported(): void
     {
-        $errors = $this->process(
-            'Valkyrja\Orm\Entity\Trait',
-            'trait Dateable { public static function getDateFormat(): string { return "Y"; } }'
+        $prefix = 'Data object ' . ReturnTypeFixture::class . ' must not have the static method ';
+
+        self::assertSame(
+            [
+                $prefix . 'getAnotherType().',
+                $prefix . 'getArray().',
+                $prefix . 'getNullable().',
+                $prefix . 'getString().',
+                $prefix . 'getUnion().',
+                $prefix . 'getUntyped().',
+            ],
+            self::messages(ReturnTypeFixture::class)
         );
-
-        self::assertCount(1, $errors);
-    }
-
-    public function testAbstractStaticMethodIsReported(): void
-    {
-        $errors = $this->process(
-            'Valkyrja\Orm\Entity\Abstract',
-            'abstract class Entity { abstract public static function getTableName(): string; }'
-        );
-
-        self::assertCount(1, $errors);
-    }
-
-    public function testInstanceMethodIsNotReported(): void
-    {
-        $errors = $this->process(
-            'Valkyrja\Auth\Entity',
-            'class User { public function getTableName(): string { return "users"; } }'
-        );
-
-        self::assertSame([], $errors);
-    }
-
-    public function testEnumIsNotReported(): void
-    {
-        $errors = $this->process(
-            'Valkyrja\Http\Message',
-            'enum StatusCode { public static function names(): array { return []; } }'
-        );
-
-        self::assertSame([], $errors);
-    }
-
-    public function testAnonymousClassIsNotReported(): void
-    {
-        $errors = $this->process(
-            'Valkyrja\Auth\Entity',
-            '$user = new class { public static function getTableName(): string { return "users"; } };'
-        );
-
-        self::assertSame([], $errors);
-    }
-
-    public function testNonDataObjectIsNotReported(): void
-    {
-        $errors = $this->process(
-            'Valkyrja\Http\Routing\Matcher',
-            'class Matcher { public static function make(): string { return "x"; } }'
-        );
-
-        self::assertSame([], $errors);
     }
 
     /**
-     * @param non-empty-string $namespace
+     * @param class-string $className
      */
     #[DataProvider('holderSegmentProvider')]
-    public function testHolderSegmentBelowADataSegmentIsNotReported(string $namespace): void
+    public function testHolderSegmentBelowADataSegmentIsNotReported(string $className): void
     {
-        $errors = $this->process(
-            $namespace,
-            'class Holder { public static function generate(): string { return "x"; } }'
-        );
-
-        self::assertSame([], $errors);
+        self::assertSame([], self::process($className));
     }
 
     /**
-     * @param non-empty-string $returnType
+     * @param class-string $className
      */
-    #[DataProvider('ownTypeReturnProvider')]
-    public function testNamedConstructorIsNotReported(string $returnType): void
+    #[DataProvider('exemptClassProvider')]
+    public function testExemptClassIsNotReported(string $className): void
     {
-        $errors = $this->process(
-            'Valkyrja\Type\String',
-            "class StringT { public static function fromValue(mixed \$value): $returnType { return new static(); } }"
-        );
-
-        self::assertSame([], $errors);
+        self::assertSame([], self::process($className));
     }
 
-    /**
-     * @param non-empty-string $returnType
-     */
-    #[DataProvider('foreignTypeReturnProvider')]
-    public function testMethodThatReturnsAnotherTypeIsReported(string $returnType): void
+    public function testFrameworkEntityContractIsReported(): void
     {
-        $errors = $this->process(
-            'Valkyrja\Type\String',
-            "class StringT { public static function getX(): $returnType { throw new \Exception(); } }"
-        );
-
-        self::assertCount(1, $errors);
-    }
-
-    public function testMethodWithoutAReturnTypeIsReported(): void
-    {
-        $errors = $this->process(
-            'Valkyrja\Auth\Entity',
-            'class User { public static function getTableName() { return "users"; } }'
-        );
-
-        self::assertCount(1, $errors);
-    }
-
-    /**
-     * @param non-empty-string $namespace
-     * @param non-empty-string $code
-     *
-     * @return list<IdentifierRuleError>
-     */
-    private function process(string $namespace, string $code): array
-    {
-        $rule   = new DataObjectStaticMethodRule();
-        $scope  = self::createStub(Scope::class);
-        $errors = [];
-
-        foreach (self::parse($namespace, $code) as $classLike) {
-            foreach ($rule->processNode($classLike, $scope) as $error) {
-                $errors[] = $error;
-            }
-        }
-
-        return $errors;
+        self::assertNotSame([], self::process(EntityContract::class));
     }
 }

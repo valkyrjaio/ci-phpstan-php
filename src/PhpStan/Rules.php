@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Valkyrja\PhpStan;
 
 use Valkyrja\PhpStan\Rule\DataObjectStaticMethodRule;
+use Valkyrja\PhpStan\Rule\StringClassReferenceRule;
 
 final class Rules
 {
@@ -27,6 +28,7 @@ final class Rules
     {
         return [
             DataObjectStaticMethodRule::class,
+            StringClassReferenceRule::class,
         ];
     }
 }

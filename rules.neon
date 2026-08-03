@@ -1,0 +1,2 @@
+rules:
+    - Valkyrja\PhpStan\Rule\DataObjectStaticMethodRule

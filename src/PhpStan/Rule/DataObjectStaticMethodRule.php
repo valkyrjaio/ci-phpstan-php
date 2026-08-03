@@ -24,7 +24,6 @@ use PHPStan\Rules\Rule;
 use PHPStan\Rules\RuleErrorBuilder;
 
 use function array_pop;
-use function end;
 use function explode;
 use function in_array;
 use function strtolower;
@@ -100,9 +99,9 @@ final class DataObjectStaticMethodRule implements Rule
             return true;
         }
 
-        $parts = explode('\\', $type);
-
-        return end($parts) === $declaringName;
+        // The comparison takes the whole name. Two data objects in different namespaces can share
+        // a short name, and a method that returns the other one does not return its own type.
+        return $type === $declaringName;
     }
 
     /**
@@ -146,7 +145,7 @@ final class DataObjectStaticMethodRule implements Rule
             }
 
             // A named constructor returns its own type, so the data object keeps it.
-            if (self::returnsOwnType($method, $name->getLast())) {
+            if (self::returnsOwnType($method, $fullyQualifiedName)) {
                 continue;
             }
 

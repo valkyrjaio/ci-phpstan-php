@@ -10,14 +10,12 @@ declare(strict_types=1);
  * Released under the MIT License. See LICENSE.md for details.
  */
 
-namespace Valkyrja\PhpStan\Tests\Fixtures\Entity\Abstract;
+namespace Valkyrja\PhpStan\Tests\Fixtures\Message\Enum;
 
-abstract class EntityFixture
+final class StatusFixture
 {
-    abstract public static function getIdField(): string;
-
-    protected static function getFormat(): string
+    public static function all(): array
     {
-        return 'Y-m-d';
+        return [];
     }
 }

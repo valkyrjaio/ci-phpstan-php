@@ -1,5 +1,5 @@
 {
-  "name"              : "valkyrja/phpstan",
+  "name"              : "valkyrja/ci-phpstan",
   "type"              : "project",
   "description"       : "PHPStan for the Valkyrja Project.",
   "homepage"          : "https://www.valkyrja.io/",

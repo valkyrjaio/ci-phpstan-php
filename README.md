@@ -9,9 +9,9 @@ configuration and reusable workflow that enforce consistent static analysis
 across consuming repositories.
 
 <p>
-    <a href="https://packagist.org/packages/valkyrja/phpstan"><img src="https://poser.pugx.org/valkyrja/phpstan/require/php" alt="PHP Version Require"></a>
-    <a href="https://packagist.org/packages/valkyrja/phpstan"><img src="https://poser.pugx.org/valkyrja/phpstan/v" alt="Latest Stable Version"></a>
-    <a href="https://packagist.org/packages/valkyrja/phpstan"><img src="https://poser.pugx.org/valkyrja/phpstan/license" alt="License"></a>
+    <a href="https://packagist.org/packages/valkyrja/ci-phpstan"><img src="https://poser.pugx.org/valkyrja/ci-phpstan/require/php" alt="PHP Version Require"></a>
+    <a href="https://packagist.org/packages/valkyrja/ci-phpstan"><img src="https://poser.pugx.org/valkyrja/ci-phpstan/v" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/valkyrja/ci-phpstan"><img src="https://poser.pugx.org/valkyrja/ci-phpstan/license" alt="License"></a>
     <a href="https://github.com/valkyrjaio/ci-phpstan-php/actions/workflows/ci.yml?query=branch%3A26.x"><img src="https://github.com/valkyrjaio/ci-phpstan-php/actions/workflows/ci.yml/badge.svg?branch=26.x" alt="CI Status"></a>
     <a href="https://scrutinizer-ci.com/g/valkyrjaio/ci-phpstan-php/?branch=26.x"><img src="https://scrutinizer-ci.com/g/valkyrjaio/phpsci-phpstan-phptan/badges/quality-score.png?b=26.x" alt="Scrutinizer"></a>
     <a href="https://coveralls.io/github/valkyrjaio/ci-phpstan-php?branch=26.x"><img src="https://coveralls.io/repos/github/valkyrjaio/ci-phpstan-php/badge.svg?branch=26.x" alt="Coverage Status" /></a>
@@ -50,7 +50,7 @@ shares. Include it from the `phpstan.neon` in the CI directory:
 ```neon
 includes:
     - phpstan-baseline.neon
-    - vendor/valkyrja/phpstan/config.neon
+    - vendor/valkyrja/ci-phpstan/config.neon
 ```
 
 ### Cache Directory

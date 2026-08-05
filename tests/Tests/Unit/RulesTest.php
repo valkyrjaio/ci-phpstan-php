@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Valkyrja\PhpStan\Tests\Unit;
 
 use Valkyrja\PhpStan\Rule\DataObjectStaticMethodRule;
+use Valkyrja\PhpStan\Rule\StringClassReferenceRule;
 use Valkyrja\PhpStan\Rules;
 use Valkyrja\PhpStan\Tests\Abstract\PhpStanTestCase;
 
@@ -33,6 +34,7 @@ final class RulesTest extends PhpStanTestCase
         self::assertSame(
             [
                 DataObjectStaticMethodRule::class,
+                StringClassReferenceRule::class,
             ],
             Rules::getRules()
         );

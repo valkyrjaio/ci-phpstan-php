@@ -12,6 +12,23 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan;
 
-class Rules
+use Valkyrja\PhpStan\Rule\DataObjectStaticMethodRule;
+use Valkyrja\PhpStan\Rule\StringClassReferenceRule;
+
+final class Rules
 {
+    /**
+     * Get every rule that this package ships.
+     *
+     * `rules.neon` registers the same list for PHPStan, and a test asserts that the two agree.
+     *
+     * @return list<class-string>
+     */
+    public static function getRules(): array
+    {
+        return [
+            DataObjectStaticMethodRule::class,
+            StringClassReferenceRule::class,
+        ];
+    }
 }

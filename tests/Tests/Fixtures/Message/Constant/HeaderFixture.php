@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Message\Constant;
 
+/**
+ * A constant holder that holds a static method below a message segment.
+ */
 final class HeaderFixture
 {
     public static function all(): array

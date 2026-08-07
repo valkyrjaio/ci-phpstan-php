@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Entity\Provider;
 
+/**
+ * A provider that holds a static method below an entity segment.
+ */
 final class UserServiceProviderFixture
 {
     public static function publishers(): array

@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Message\Enum;
 
+/**
+ * A class that holds a static method below an enum segment.
+ */
 final class StatusFixture
 {
     public static function all(): array

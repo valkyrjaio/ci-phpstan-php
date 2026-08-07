@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Entity\Contract;
 
+/**
+ * A contract that declares a static method.
+ */
 interface UserFixtureContract
 {
     public static function getUsernameField(): string;

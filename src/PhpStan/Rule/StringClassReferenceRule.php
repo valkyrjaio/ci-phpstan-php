@@ -24,8 +24,6 @@ use function ltrim;
 use function str_contains;
 
 /**
- * A class reference uses `::class`. It never uses a string literal.
- *
  * @implements Rule<String_>
  */
 final class StringClassReferenceRule implements Rule
@@ -59,9 +57,7 @@ final class StringClassReferenceRule implements Rule
     {
         $value = ltrim($node->value, '\\');
 
-        // A string only names a class when it is fully qualified, because PHP never resolves a
-        // string against the use statements of a file. A string with no namespace separator is
-        // data, and a word such as "Exception" is a word far more often than it is a reference.
+        // PHP never resolves a string against the use statements of a file.
         if (! str_contains($value, '\\')) {
             return [];
         }

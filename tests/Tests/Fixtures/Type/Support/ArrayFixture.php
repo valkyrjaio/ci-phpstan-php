@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Type\Support;
 
+/**
+ * A support class that holds a static method below a type segment.
+ */
 final class ArrayFixture
 {
     public static function flatten(array $value): array

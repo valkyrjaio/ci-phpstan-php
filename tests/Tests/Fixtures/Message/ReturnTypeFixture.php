@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Message;
 
+/**
+ * A data object that shares its short name with another data object.
+ */
 final class ReturnTypeFixture
 {
 }

@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Entity\Trait;
 
+/**
+ * A trait that holds a static method for a data object.
+ */
 trait DateableFixtureTrait
 {
     public static function getDateFormat(): string

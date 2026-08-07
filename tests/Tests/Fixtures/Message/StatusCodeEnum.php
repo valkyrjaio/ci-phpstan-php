@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Message;
 
+/**
+ * An enum that holds a static method.
+ */
 enum StatusCodeEnum: int
 {
     case OK = 200;

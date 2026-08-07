@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Entity;
 
+/**
+ * A data object that holds a static method.
+ */
 final class UserFixture
 {
     public static function getTableName(): string

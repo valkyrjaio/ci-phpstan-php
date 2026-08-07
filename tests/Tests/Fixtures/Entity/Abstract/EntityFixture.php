@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Entity\Abstract;
 
+/**
+ * An abstract data object that holds an abstract and a protected static method.
+ */
 abstract class EntityFixture
 {
     abstract public static function getIdField(): string;

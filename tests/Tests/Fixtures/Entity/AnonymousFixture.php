@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Entity;
 
+/**
+ * A data object that holds an anonymous class with a static method.
+ */
 final class AnonymousFixture
 {
     public function make(): object

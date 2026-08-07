@@ -15,6 +15,9 @@ namespace Valkyrja\PhpStan\Tests\Fixtures\Type;
 use Valkyrja\PhpStan\Tests\Fixtures\Message\ReturnTypeFixture as MessageReturnTypeFixture;
 use Valkyrja\PhpStan\Tests\Fixtures\Routing\MatcherFixture;
 
+/**
+ * A data object that holds a static method for each return type shape.
+ */
 final class ReturnTypeFixture
 {
     public static function fromStatic(): static

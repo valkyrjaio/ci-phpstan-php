@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Type\Factory;
 
+/**
+ * A factory that holds a static method below a type segment.
+ */
 final class UuidFactoryFixture
 {
     public static function generate(): string

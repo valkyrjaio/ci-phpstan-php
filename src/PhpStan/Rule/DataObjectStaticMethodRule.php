@@ -29,8 +29,6 @@ use function in_array;
 use function strtolower;
 
 /**
- * A data object holds data and the behavior of its own state. It does not hold a static method.
- *
  * @implements Rule<ClassLike>
  */
 final class DataObjectStaticMethodRule implements Rule
@@ -99,8 +97,7 @@ final class DataObjectStaticMethodRule implements Rule
             return true;
         }
 
-        // The comparison takes the whole name. Two data objects in different namespaces can share
-        // a short name, and a method that returns the other one does not return its own type.
+        // Two data objects in different namespaces can share a short name.
         return $type === $declaringName;
     }
 

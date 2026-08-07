@@ -12,6 +12,9 @@ declare(strict_types=1);
 
 namespace Valkyrja\PhpStan\Tests\Fixtures\Routing;
 
+/**
+ * A class that holds a static method below no data segment.
+ */
 final class MatcherFixture
 {
     public static function make(): string

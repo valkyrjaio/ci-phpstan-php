@@ -1,6 +1,12 @@
 # Release Notes for 26.x
 
-## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.3.9...26.x)
+## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.3.10...26.x)
+
+## [v26.3.10](https://github.com/valkyrjaio/phpstan/compare/v26.3.9...v26.3.10) - 2026-08-13
+
+* [Workflow] ci: Run the checks on a pull request that targets any branch by [@MelechMizrachi](https://github.com/MelechMizrachi) in https://github.com/valkyrjaio/ci-phpstan-php/pull/208
+* [Workflow] ci: Update .github workflow refs to v26.24.5 by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/209
+* [Dependency] build: Update composer dependencies by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/210
 
 ## [v26.3.9](https://github.com/valkyrjaio/phpstan/compare/v26.3.8...v26.3.9) - 2026-08-12
 

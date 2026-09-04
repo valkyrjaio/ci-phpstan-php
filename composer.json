@@ -17,7 +17,7 @@
   ],
   "require"           : {
     "php"             : ">=8.4",
-    "phpstan/phpstan" : "^2.2.12"
+    "phpstan/phpstan" : "^2.2.13"
   },
   "autoload"          : {
     "psr-4" : {

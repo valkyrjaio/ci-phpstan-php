@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7dee80ce0a630f3c62adf83ee0eceeb8",
+    "content-hash": "eabaf14fe3c534d85725e3829a231a21",
     "packages": [],
     "packages-dev": [
         {
@@ -2884,16 +2884,16 @@
         },
         {
             "name": "valkyrja/ci-phpcsfixer",
-            "version": "v26.4.89",
+            "version": "v26.4.90",
             "source": {
                 "type": "git",
                 "url": "https://github.com/valkyrjaio/ci-phpcsfixer-php.git",
-                "reference": "fed80879341a48c7688f1e14d9e102753877f5de"
+                "reference": "c12d5e0e0aaa5f50c17da328d10afc3b3e179b1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/valkyrjaio/ci-phpcsfixer-php/zipball/fed80879341a48c7688f1e14d9e102753877f5de",
-                "reference": "fed80879341a48c7688f1e14d9e102753877f5de",
+                "url": "https://api.github.com/repos/valkyrjaio/ci-phpcsfixer-php/zipball/c12d5e0e0aaa5f50c17da328d10afc3b3e179b1b",
+                "reference": "c12d5e0e0aaa5f50c17da328d10afc3b3e179b1b",
                 "shasum": ""
             },
             "require": {
@@ -2925,10 +2925,10 @@
             ],
             "support": {
                 "issues": "https://github.com/valkyrjaio/ci-phpcsfixer-php/issues",
-                "source": "https://github.com/valkyrjaio/ci-phpcsfixer-php/tree/v26.4.89"
+                "source": "https://github.com/valkyrjaio/ci-phpcsfixer-php/tree/v26.4.90"
             },
-            "time": "2026-11-04T18:25:58+00:00",
-            "published-time": "2026-11-04T18:26:10+00:00"
+            "time": "2026-11-05T18:29:31+00:00",
+            "published-time": "2026-11-05T18:29:42+00:00"
         }
     ],
     "aliases": [],

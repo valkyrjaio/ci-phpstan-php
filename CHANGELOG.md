@@ -1,6 +1,11 @@
 # Release Notes for 26.x
 
-## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.3.90...26.x)
+## [Unreleased](https://github.com/valkyrjaio/phpstan/compare/v26.3.91...26.x)
+
+## [v26.3.91](https://github.com/valkyrjaio/phpstan/compare/v26.3.90...v26.3.91) - 2026-11-08
+
+* [Dependency] build: Update composer dependencies by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/381
+* [Dependency] build: Update composer dependencies by [@valkyrja-volundr](https://github.com/valkyrja-volundr)[bot] in https://github.com/valkyrjaio/ci-phpstan-php/pull/382
 
 ## [v26.3.90](https://github.com/valkyrjaio/phpstan/compare/v26.3.89...v26.3.90) - 2026-11-07
 

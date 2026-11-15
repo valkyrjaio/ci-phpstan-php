@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f523a352083c646ff1c740cf337f09a4",
+    "content-hash": "78f37a7eef6cb1a9c5fb648734c1721d",
     "packages": [],
     "packages-dev": [
         {
@@ -1217,16 +1217,16 @@
         },
         {
             "name": "symfony/polyfill-php85",
-            "version": "v1.43.0",
+            "version": "v1.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-php85.git",
-                "reference": "86a42cbcc07adc331481a5ab310a4024bfc227f6"
+                "reference": "94c794cb5ba51784bc259f11e9f128593297d8dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/86a42cbcc07adc331481a5ab310a4024bfc227f6",
-                "reference": "86a42cbcc07adc331481a5ab310a4024bfc227f6",
+                "url": "https://api.github.com/repos/symfony/polyfill-php85/zipball/94c794cb5ba51784bc259f11e9f128593297d8dc",
+                "reference": "94c794cb5ba51784bc259f11e9f128593297d8dc",
                 "shasum": ""
             },
             "require": {
@@ -1273,7 +1273,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https://github.com/symfony/polyfill-php85/tree/v1.43.0"
+                "source": "https://github.com/symfony/polyfill-php85/tree/v1.44.0"
             },
             "funding": [
                 {
@@ -1293,8 +1293,8 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-09-25T15:46:47+00:00",
-            "published-time": "2026-09-30T10:23:32+00:00"
+            "time": "2026-10-30T15:20:09+00:00",
+            "published-time": "2026-11-15T14:20:22+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -1477,16 +1477,16 @@
         },
         {
             "name": "valkyrja/ci-phparkitect",
-            "version": "v26.7.97",
+            "version": "v26.7.98",
             "source": {
                 "type": "git",
                 "url": "https://github.com/valkyrjaio/ci-phparkitect-php.git",
-                "reference": "5a78dde5818cc738f2a84a351548e4065ce6ad47"
+                "reference": "7bd10594c15080d95cf77c4bd760fe9ca1bbbe6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/valkyrjaio/ci-phparkitect-php/zipball/5a78dde5818cc738f2a84a351548e4065ce6ad47",
-                "reference": "5a78dde5818cc738f2a84a351548e4065ce6ad47",
+                "url": "https://api.github.com/repos/valkyrjaio/ci-phparkitect-php/zipball/7bd10594c15080d95cf77c4bd760fe9ca1bbbe6e",
+                "reference": "7bd10594c15080d95cf77c4bd760fe9ca1bbbe6e",
                 "shasum": ""
             },
             "require": {
@@ -1518,10 +1518,10 @@
             ],
             "support": {
                 "issues": "https://github.com/valkyrjaio/ci-phparkitect-php/issues",
-                "source": "https://github.com/valkyrjaio/ci-phparkitect-php/tree/v26.7.97"
+                "source": "https://github.com/valkyrjaio/ci-phparkitect-php/tree/v26.7.98"
             },
-            "time": "2026-11-13T18:22:03+00:00",
-            "published-time": "2026-11-13T18:22:13+00:00"
+            "time": "2026-11-14T16:51:41+00:00",
+            "published-time": "2026-11-14T16:51:49+00:00"
         },
         {
             "name": "webmozart/assert",
